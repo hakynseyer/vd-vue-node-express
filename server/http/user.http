@@ -1,0 +1,50 @@
+GET {{HTTP_HOST}}/usuario
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+GET {{HTTP_HOST}}/usuario/3
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+
+POST {{HTTP_HOST}}/usuario/crear
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "name": "BORRAR 2",
+  "surnameFirst": "Chavez",
+  "surnameSecond": "Mendez",
+  "password": "22sssasa$",
+  "address": "Rio de las avenidas",
+  "city": "San Juan del Rio",
+  "country": "Mexico",
+  "notes": "Es la chica ficticia",
+  "rank": 2
+}
+
+
+PUT {{HTTP_HOST}}/usuario/actualizar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 3,
+  "name": "Carmen",
+  "surnameFirst": "Chavez",
+  "surnameSecond": "Mendez",
+  "password": "222aaa$$$",
+  "address": "Rio de las avenidas",
+  "city": "San Juan del Rio",
+  "country": "Mexico",
+  "notes": "Es la ingeniera del turno matutino",
+  "rank": 2
+}
+
+DELETE {{HTTP_HOST}}/usuario/eliminar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 12
+}

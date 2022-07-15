@@ -1,0 +1,183 @@
+*
+  margin: 0
+  padding: 0
+  box-sizing: boder-box
+
+  // --va-primary: #2c82e0;
+  // --va-secondary: #767c88;
+  // --va-background: #f4f8fa;
+  // --va-success: #40e583;
+  // --va-info: #2c82e0;
+  // --va-danger: #de1041;
+  // --va-warning: #ffac0a;
+  // --va-gray: #babfc2;
+  // --va-divider: #e1e9f8;
+
+  // --va-dark: #1c1b1f;
+  // --va-white: #ededed;
+  // --va-black: #000000;
+
+html
+  font-size: 16px
+  font-family: sans-serif
+
+body
+  background-color: var(--va-white)
+  color: var(--va-dark)
+
+a
+  color: var(--va-dark)
+
+input, textarea, select, 
+  color: var(--va-dark) !important;
+  font-weight: bold !important;
+  // height: 2rem
+  margin-top: .5rem
+
+textarea, select 
+  margin: 12px 0 0 0 !important
+
+.va-input-wrapper
+  overflow: hidden
+
+.va-input-wrapper__text
+  font-weight: bold !important;
+  padding: 25px 0 10px 0 !important;
+
+.va-select
+  cursor: pointer
+
+.va-input-wrapper--error
+  overflow: hidden
+  --va-input-wrapper-border-color: none !important
+  // --va-input-wrapper-background: var !important
+  --va-input-wrapper-background-opacity: none !important
+
+.va-input-wrapper__container
+  border: solid 2px var(--va-dark)
+  border-radius: 10px !important
+  outline: none
+  overflow: hidden
+  // background-color: var(--va-dark) !important
+
+.va-input-wrapper--bordered:after
+  border: solid 1px var(--va-gray) !important
+
+.va-input-wrapper--labeled .va-input-wrapper__label
+  // background-color: var(--va-dark)
+  color: var(--va-gray) !important
+  padding: 3px
+  box-sizing: border-box
+  // border-radius: 3px
+  line-height: none !important
+
+.va-input-wrapper__label
+  // background-color: var(--va-dark)
+  border-style: none solid solid none
+  border-width: 2px 
+  border-color: var(--va-dark)
+  top: -0px !important
+  left: -15px !important
+  height: 20px !important
+  border-radius: 0 0 5px 0
+  padding-left: 10px !important
+  // text-transform: capitalize !important
+  font-style: italic !important
+
+  & > *
+    margin-left: 5px
+  
+.va-message-list__message
+  padding: 0 10px
+  text-align: center
+  // color: var(--va-gray)
+
+.va-select-dropdown__content
+  background-color: var(--va-dark) !important
+  border: solid 2px var(--va-dark) !important
+
+.va-select-option-list__option
+  background-color: var(--va-dark) !important
+
+  &:hover
+    background-color: var(--va-white) !important
+
+    span
+      color: var(--va-dark)
+    
+    i
+      color: var(--va-dark)
+
+.va-select-dropdown__content span
+  color: var(--va-white)
+
+.va-select-dropdown__content i
+  color: var(--va-white)
+
+button:disabled
+  background-color: var(--va-dark) !important
+
+h1
+  width: 100%
+  padding: 0 4rem 
+  font-size: 2rem
+  text-transform: capitalize
+  margin-bottom: 1rem
+  display: flex
+  align-items: center
+  padding-left: 3rem
+  border-bottom: solid 2px var(--va-dark)
+  padding-bottom: .5rem
+
+  &:before
+    content: ''
+    width: 0
+    height: 0
+    border-left: 30px solid var(--va-dark)
+    border-top: 15px solid transparent
+    border-bottom: 15px solid transparent
+    margin-right: 1rem
+    display: block
+
+.alert
+  z-index: 5
+  position: fixed !important
+  width: 30%
+  height: 3rem
+  top: 0
+  left: 0
+  text-align: center;
+  font-weight: bold;
+  animation: alerta 200ms ease
+
+  @keyframes alerta
+    from
+      transform: translateY(-100%)
+    to
+      transform: translateY(0%)
+
+.contenido
+  // background-color: yellow
+  padding: 1rem 13rem
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+
+.form
+  width: 100%
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+
+  &__bloque
+    // background-color: yellow
+    width: 42%
+    margin: 1rem
+
+  &__input
+    width: 100%
+    margin-bottom: 1rem
+
+    &:last-child
+      margin-bottom: 0
+

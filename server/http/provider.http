@@ -1,0 +1,38 @@
+GET {{HTTP_HOST}}/proveedor
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+GET {{HTTP_HOST}}/proveedor/1
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+
+POST {{HTTP_HOST}}/proveedor/crear
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "company": "BORRAR",
+  "description": "BORAR",
+  "user": 1
+}
+
+
+PUT {{HTTP_HOST}}/proveedor/actualizar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 1,
+  "company": "Hakyn Club",
+  "description": "Proveedora de aceros, hierros y soldaduras",
+  "user": 1
+}
+
+DELETE {{HTTP_HOST}}/proveedor/eliminar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 3
+}

@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@TS/*": ["client/ts/*"],
+      "@Assets/*": ["client/assets/*"]
+    }
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs"
+    }
+  },
+  "include": ["server/**/*.ts", "client/**/*.ts", "client/**/*.vue"],
+  "exclude": ["node_modules"]
+}

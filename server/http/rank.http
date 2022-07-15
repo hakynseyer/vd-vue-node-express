@@ -1,0 +1,36 @@
+GET {{HTTP_HOST}}/rango
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+GET {{HTTP_HOST}}/rango/2
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+
+POST {{HTTP_HOST}}/rango/crear
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "rank": "BORRAR",
+  "description": "BORAR"
+}
+
+
+PUT {{HTTP_HOST}}/rango/actualizar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 4,
+  "rank": "Hakyn Club",
+  "description": "Proveedora de aceros, hierros y soldaduras"
+}
+
+DELETE {{HTTP_HOST}}/rango/eliminar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 4
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= server.title %></title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <%= htmlWebpackPlugin.tags.headTags %>
+  </head>
+  <body>
+    <main id="app"></main>
+
+    <script type="text/javascript">
+      var THE_SERVER = {
+        creador: "<%= server.creador %>",
+        creadorEmail: "<%= server.creadorEmail %>",
+        host: "<%= server.host %>",
+      };
+    </script>
+
+    <%= htmlWebpackPlugin.tags.bodyTags %>
+  </body>
+</html>

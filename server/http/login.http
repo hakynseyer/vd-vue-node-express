@@ -1,0 +1,12 @@
+POST {{HTTP_HOST}}/login/acceso
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "user": "joaquiN", 
+  "password": "111aaa$$$"
+}
+
+POST {{HTTP_HOST}}/login/token
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}

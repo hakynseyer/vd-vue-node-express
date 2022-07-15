@@ -1,0 +1,44 @@
+GET {{HTTP_HOST}}/material
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+GET {{HTTP_HOST}}/material/2
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+
+POST {{HTTP_HOST}}/material/crear
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "name": "Tuercas DUPLICADO",
+  "description": "Tuercas 3/8 de pulgada",
+  "amount": 400,
+  "um": "Bultos",
+  "price": "2.09",
+  "provider": 2
+}
+
+
+PUT {{HTTP_HOST}}/material/actualizar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 1,
+  "name": "Tornillos",
+  "description": "Tornillos 3/8 de pulgada",
+  "amount": 3400,
+  "um": "Piezas",
+  "price": "23",
+  "provider": 1
+}
+
+DELETE {{HTTP_HOST}}/material/eliminar
+Content-Type: application/json
+Authorization: Token {{HTTP_TOKEN}}
+
+{
+  "id": 3
+}
