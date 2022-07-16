@@ -4,3 +4,8 @@ export interface ALERT_DATA {
   message?: string;
   timer?: number;
 }
+
+export interface SelectOptions {
+  label: string;
+  value: string;
+}

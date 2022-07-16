@@ -25,7 +25,7 @@ const selectItem = (data): void => {
 <template lang="pug">
 .table
   .table__header
-    .table__header__item(v-for="(item, index) in header", :key="index") {{ item }}
+    .table__header__item(v-for="(item, index) in header", :key="index") {{ item.label }}
   .table__content
     .table__content__row(
       v-for="(row, index) in data",

@@ -59,7 +59,7 @@ export class FormClass {
   get enableSend(): ComputedRef<boolean> {
     return computed<boolean>((): boolean => {
       const noEmpty: boolean =
-        this._form.user.data.length && this._form.user.data.length
+        this._form.user.data.length && this._form.password.data.length
           ? true
           : false;
 

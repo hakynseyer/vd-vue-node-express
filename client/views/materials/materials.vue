@@ -8,21 +8,15 @@ declare var THE_SERVER: any;
 
 // [ COMPONENTS ]
 import Table from "@Components/table/table.vue";
+import Form from "./components/form.vue";
+
+// [ TS ]
+import { MaterialsClass } from "./materials";
+import { TableClass } from "./ts/table";
 
 // [ REF ]
-const headers = ref<Array<string>>([
-  "id",
-  "name",
-  "description",
-  "provider",
-  "user",
-  "rank",
-  "amount",
-  "um",
-  "price",
-]);
-const materials = ref();
-const materialSelected = ref();
+const Materials = ref<MaterialsClass>(new MaterialsClass());
+const TableInfo = ref<TableClass>(new TableClass());
 
 // [ HOOKS ]
 onMounted(async () => {
@@ -35,32 +29,8 @@ onMounted(async () => {
     const res = await fetch(request);
     const data = await res.json();
 
-    const dataMap = data.materials.map((row) => {
-      const dataJson = {};
+    TableInfo.value.materials = data.materials;
 
-      headers.value.forEach((header) => {
-        switch (header) {
-          case "provider":
-            dataJson[header] = row.Provider.company;
-            break;
-          case "user":
-            dataJson[
-              header
-            ] = `${row.Provider.User.name} ${row.Provider.User.surname_first} ${row.Provider.User.surname_second}`;
-            break;
-          case "rank":
-            dataJson[header] = row.Provider.User.Rank.rank;
-            break;
-          default:
-            dataJson[header] = row[header];
-            break;
-        }
-      });
-
-      return dataJson;
-    });
-
-    materials.value = dataMap;
     return;
   } catch (e) {
     console.error(e);
@@ -75,17 +45,19 @@ onMounted(async () => {
 
 // [ EVENTBUS ]
 EM.emit("APP_H1", "Lista de Materiales");
-
-// [ METHODS ]
-const tableMaterial = (material) => {
-  materialSelected.value = material;
-};
 </script>
 
 <template lang="pug">
 .materials
-  span {{ materialSelected }}
-  Table(:header="headers", :data="materials", @itemSelected="tableMaterial")
+  .materials__table
+    Table(
+      :header="TableInfo.headers",
+      :data="TableInfo.materials",
+      @itemSelected="TableInfo.saveMaterialSelected($event)"
+    )
+  .materials__actions
+    h2 {{ Materials.titleForm }}
+    Form
 </template>
 
 <style lang="sass" scoped>

@@ -16,9 +16,9 @@ const form = ref<FormClass>(new FormClass());
 EM.emit("APP_H1", "Iniciar Sesión");
 
 // [ METHODS ]
-const inputData = (data: string) => {
-  form.value.user = data;
-};
+/* const inputData = (data: string) => { */
+/*   form.value.user = data; */
+/* }; */
 </script>
 
 <template lang="pug">
