@@ -228,7 +228,7 @@ const htmlWebpackPluginOptions = (key) => {
         title: "FRONTEND DEVELOPER",
         creador: process.env.WEBPACK_CREATOR,
         creadorEmail: process.env.WEBPACK_CREATOR_EMAIL,
-        host: process.env.HOST_BACKEND,
+        host: `${process.env.HOST_BACKEND}:${process.env.HOST_BACKEND_PORT}`,
       },
     };
   } else {

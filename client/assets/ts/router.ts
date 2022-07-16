@@ -2,16 +2,16 @@ import { createRouter, createWebHashHistory } from "vue-router";
 // import { Fetch, FETCH_METHODS } from "@Extras/ts/fetch";
 // import { useStore } from "@Extras/ts/store";
 
-import Home from "@Views/home/home.vue";
-// import Login from '@Vistas/login/login.vue';
+import Login from "@Views/login/login.vue";
+import Materials from "@Views/materials/materials.vue";
 // import Panel from '@Vistas/panel/panel.vue';
 // import Clientes from '@Vistas/clientes/clientes.vue';
 
 declare var THE_SERVER: any;
 
 const routes = [
-  { path: "/", name: "inicio", component: Home },
-  // { path: '/login', name: 'login', component: Login },
+  { path: "/", name: "login", component: Login },
+  { path: "/materials", name: "materials", component: Materials },
   // {
   //   path: '/panel',
   //   name: 'panel',

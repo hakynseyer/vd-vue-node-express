@@ -1,17 +1,6 @@
-export interface InterAlert {
+export interface ALERT_DATA {
   color?: string;
-  mensaje?: string;
-  activar: boolean;
+  status?: boolean;
+  message?: string;
   timer?: number;
-}
-
-export interface URL_Pventa {
-  icono: string;
-  descripcion: string;
-  ruta: string;
-}
-
-export interface Menu_Default {
-  icono: string;
-  titulo: string;
 }

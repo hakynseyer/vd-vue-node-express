@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { Users } from "../../../models/users";
+import { Users, UsersOutput } from "../../../models/users";
 import { Ranks } from "../../../models/ranks";
 
 export class user_Read {
@@ -28,7 +28,7 @@ export class user_Read {
     const { id } = req.params;
 
     try {
-      const user = await Users.findByPk(id, {
+      const user: UsersOutput = await Users.findByPk(id, {
         include: [
           {
             model: Ranks,

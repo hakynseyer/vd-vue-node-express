@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { Providers } from "../../../models/providers";
+import { Providers, ProvidersOutput } from "../../../models/providers";
 import { Users } from "../../../models/users";
 import { Ranks } from "../../../models/ranks";
 
@@ -34,7 +34,7 @@ export class provider_Read {
     const { id } = req.params;
 
     try {
-      const provider = await Providers.findByPk(id, {
+      const provider: ProvidersOutput = await Providers.findByPk(id, {
         include: [
           {
             model: Users,

@@ -1,0 +1,36 @@
+.alert
+  z-index: 5
+  position: fixed !important
+  width: 30%
+  height: 3rem
+  top: 0
+  left: 0
+  text-align: center;
+  font-weight: bold;
+  animation: alerta 200ms ease
+  padding: .5em
+  display: flex
+  justify-content: center
+  align-items: center
+  color: var(--color-white)
+  font-size: .8rem
+
+  @keyframes alerta
+    from
+      transform: translateY(-100%)
+    to
+      transform: translateY(0%)
+  
+  &--normal
+    background-color: var(--color-primary)
+  
+  &--danger
+    background-color: var(--color-danger)
+  
+  &--warning
+    background-color: var(--color-warning)
+    color: var(--color-dark)
+  
+  &--success
+    background-color: var(--color-success)
+    color: var(--color-dark)

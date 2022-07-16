@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { Ranks } from "../../../models/ranks";
+import { Ranks, RanksInput, RanksOutput } from "../../../models/ranks";
 
 export class rank_Read {
   public static async all(req: Request, res: Response, next: NextFunction) {
@@ -22,7 +22,7 @@ export class rank_Read {
     const { id } = req.params;
 
     try {
-      const rank = await Ranks.findByPk(id);
+      const rank: RanksOutput = await Ranks.findByPk(id);
 
       res.status(200).json({
         rank,

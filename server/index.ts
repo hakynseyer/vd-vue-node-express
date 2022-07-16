@@ -1,4 +1,5 @@
 import express, { Application } from "express";
+import cors from "cors";
 
 import dotenv from "dotenv";
 dotenv.config({ path: "./.env" });
@@ -17,6 +18,13 @@ import materialRoutes from "./views/material/material";
 
 // Init
 const app: Application = express();
+
+// Cors
+const corsOptions = {
+  origin: "http://localhost:9000",
+};
+
+app.use(cors(corsOptions));
 
 // Settings
 app.set("port", process.env.HOST_BACKEND_PORT);

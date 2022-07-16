@@ -2,7 +2,7 @@ GET {{HTTP_HOST}}/usuario
 Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 
-GET {{HTTP_HOST}}/usuario/3
+GET {{HTTP_HOST}}/usuario/13
 Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 
@@ -12,15 +12,15 @@ Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 
 {
-  "name": "BORRAR 2",
-  "surnameFirst": "Chavez",
-  "surnameSecond": "Mendez",
-  "password": "22sssasa$",
-  "address": "Rio de las avenidas",
-  "city": "San Juan del Rio",
+  "name": "Yaqueline",
+  "surnameFirst": "Segovia",
+  "surnameSecond": "Lunares",
+  "password": "111aaa",
+  "address": "Pachuca",
+  "city": "Pachuca",
   "country": "Mexico",
-  "notes": "Es la chica ficticia",
-  "rank": 2
+  "notes": "Proveedora de maderas",
+  "rank": 1
 }
 
 
@@ -46,5 +46,5 @@ Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 
 {
-  "id": 12
+  "id": 13
 }

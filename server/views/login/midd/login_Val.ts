@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 
 import { Validator } from "../../../validator";
 
-export class loginIndex_Val {
+export class login_Val {
   public static midd(req: Request, res: Response, next: NextFunction) {
     const { user, password } = req.body;
 

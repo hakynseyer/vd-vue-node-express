@@ -3,8 +3,24 @@ import { Request, Response, NextFunction } from "express";
 import { Validator } from "../../../validator";
 import { Ranks } from "../../../models/ranks";
 
+interface ReqBody {
+  name: string;
+  surnameFirst: string;
+  surnameSecond: string;
+  password: string;
+  address: string;
+  city: string;
+  country: string;
+  notes: string;
+  rank: number;
+}
+
 export class user_Val {
-  public static async midd(req: Request, res: Response, next: NextFunction) {
+  public static async midd(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     const {
       name,
       surnameFirst,
@@ -15,7 +31,7 @@ export class user_Val {
       country,
       notes,
       rank,
-    } = req.body;
+    }: ReqBody = req.body;
 
     const valName = Validator.basic(name, 4, 15);
     const valSurnameFirst = Validator.basic(surnameFirst, 4, 15);

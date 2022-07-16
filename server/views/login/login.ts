@@ -1,10 +1,10 @@
 import { Router, Request, Response } from "express";
 
-import { loginIndex_Val } from "./index/loginIndex_Val";
-import { loginIndex_Access } from "./index/loginIndex_Access";
+import { login_Val } from "./midd/login_Val";
+import { login_Access } from "./midd/login_Access";
 
 const router: Router = Router();
 
-router.post("/acceso", loginIndex_Val.midd, loginIndex_Access.midd);
+router.post("/acceso", login_Val.midd, login_Access.midd);
 
 export default router;
