@@ -182,6 +182,13 @@ export class FormClass {
     });
   }
 
+  get titleSend(): ComputedRef<string> {
+    return computed<string>((): string => {
+      if (this._materialSelected === null) return "Crear Material";
+      else return "Editar Material";
+    });
+  }
+
   public async getProviderList(): Promise<void> {
     const request: Request = Fetch.request(
       `${THE_SERVER.host}/proveedor`,
@@ -212,8 +219,6 @@ export class FormClass {
   }
 
   public async sendForm(): Promise<void> {
-    console.log("HOLA");
-    return;
     EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "warning",
       message: "Enviando Datos al Servidor",

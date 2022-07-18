@@ -4,6 +4,9 @@ import { ref, computed } from "vue";
 import type { ComputedRef } from "vue";
 import * as Interfaces from "@TS/interfaces";
 
+// [ TYPESCRIPT ]
+import { useClickOutside } from "@Assets/ts/clickOutside";
+
 // [ PROPS ]
 interface Props {
   typeInput?: string;
@@ -11,8 +14,6 @@ interface Props {
   error?: string;
   cols?: number;
   rows?: number;
-  options?: Array<Interfaces.TypeSelectOptions>;
-  initOption?: Interfaces.TypeSelectOptions;
   modelValue?;
 }
 
@@ -22,24 +23,6 @@ const props: Props = withDefaults(defineProps<Props>(), {
   error: "",
   cols: 20,
   rows: 5,
-  options: [],
-  initOption: { label: "vacio", value: "" },
-});
-
-// [ REF ]
-const data = ref<string>("");
-const activeSelectOptions = ref<boolean>(false);
-
-// [ COMPUTED ]
-const selectInputLabel: ComputedRef = computed<string>((): string => {
-  let data = `--${props.initOption.label}--`;
-
-  if (props.options !== null)
-    props.options.forEach((opt: Interfaces.TypeSelectOptions) => {
-      if (opt.value === props.modelValue) data = opt.label;
-    });
-
-  return data;
 });
 
 // [ EMITS ]
@@ -65,26 +48,9 @@ const emit = defineEmits(["update:modelValue"]);
     @input="emit('update:modelValue', $event.target.value)"
   )
 
-  template(v-else-if="typeInput === 'select'")
-    .input__select(@click="activeSelectOptions = !activeSelectOptions")
-      span {{ selectInputLabel }}
-      i.material-icons expand_more
-      ul.input__select__options(v-show="activeSelectOptions")
-        li(
-          v-for="(item, index) in options",
-          :key="index",
-          @click="emit('update:modelValue', item.value)"
-        ) {{ item.label }}
-
-  select(
-    v-else-if="typeInput === 'select2'",
-    @change="emit('update:modelValue', $event.target.value)"
-  )
-    option(:value="initOption.value") --{{ initOption.label }}--
-    option(v-for="(item, index) in options", :key="index", :value="item.value") {{ item.label }}
   span {{ error }}
 </template>
 
 <style lang="sass" scoped>
-@import "./input.sass"
+@import "@Assets/sass/form.sass"
 </style>

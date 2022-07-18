@@ -20,10 +20,16 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 // [ REF ]
-const hideActions = ref(false);
+const hideActions = ref<boolean>(false);
+const searchInput = ref<string>("");
 
 // [ EMITS ]
-const emit = defineEmits(["itemSelected", "activeInfo", "activeDelete"]);
+const emit = defineEmits([
+  "itemSelected",
+  "activeInfo",
+  "activeDelete",
+  "searchData",
+]);
 
 // [ COMPUTED ]
 const hideActionsButton: ComputedRef = computed<string>((): string => {
@@ -41,6 +47,9 @@ const activeInfo = (data): void => {
 const activeDelete = (data): void => {
   emit("activeDelete", data);
 };
+const searchData = (): void => {
+  emit("searchData", searchInput.value);
+};
 
 const fixColumnsDataList = (row: Interfaces.TypeMaterial) => {
   const list = {};
@@ -50,6 +59,10 @@ const fixColumnsDataList = (row: Interfaces.TypeMaterial) => {
   });
 
   return list;
+};
+
+const searchDataKeyup = (event): void => {
+  if (event.keyCode === 13) emit("searchData", searchInput.value);
 };
 </script>
 
@@ -61,6 +74,15 @@ const fixColumnsDataList = (row: Interfaces.TypeMaterial) => {
     type="button",
     @click="hideActions = !hideActions"
   ) {{ hideActionsButton }}
+
+  .table__controls--search
+    input(
+      type="text",
+      placeholder="Buscar...",
+      v-model="searchInput",
+      @keyup="searchDataKeyup($event)"
+    )
+    i.material-icons(@click="searchData()") search
 .table
   .table__header
     .table__header__item.table__header__item--actions(
@@ -79,11 +101,11 @@ const fixColumnsDataList = (row: Interfaces.TypeMaterial) => {
         i.material-icons.table__content__row__item--actions__info(
           v-if="infoIcon === true",
           v-on:click.stop="activeInfo(row)"
-        ) face
+        ) info
         i.material-icons.table__content__row__item--actions__delete(
           v-if="deleteIcon === true",
           v-on:click.stop="activeDelete(row)"
-        ) face
+        ) delete
       .table__content__row__item(
         v-for="(item, index) in fixColumnsDataList(row)",
         :key="index"

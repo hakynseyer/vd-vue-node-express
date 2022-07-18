@@ -6,6 +6,7 @@ import * as Interfaces from "@TS/interfaces";
 
 // [ COMPONENTES ]
 import Input from "@Components/input/input.vue";
+import Select from "@Components/select/select.vue";
 
 // [ TYPESCRIPT ]
 import { FormClass } from "./form";
@@ -44,6 +45,7 @@ EM.on(
 <template lang="pug">
 .form
   Input(label="Producto", :error="form.nameError", v-model="form.name")
+
   Input(
     typeInput="textarea",
     label="Descripción",
@@ -56,8 +58,7 @@ EM.on(
     :error="form.amountError",
     v-model="form.amount"
   )
-  Input(
-    typeInput="select",
+  Select(
     :options="form.umList",
     :initOption="{ label: 'Medida', value: '' }",
     label="Medida",
@@ -71,8 +72,7 @@ EM.on(
     v-model="form.price"
   )
 
-  Input(
-    typeInput="select",
+  Select(
     :options="form.providerList",
     :initOption="{ label: 'Proveedor', value: 0 }",
     label="Proveedor",
@@ -84,7 +84,7 @@ EM.on(
     type="button",
     @click="form.sendForm()",
     :disabled="form.enableSend"
-  ) Enviar
+  ) {{ form.titleSend }}
 </template>
 
 <style lang="sass" scoped>

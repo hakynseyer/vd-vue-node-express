@@ -17,7 +17,7 @@ const TableInfo = ref<TableClass>(new TableClass());
 
 // [ HOOKS ]
 onMounted(async () => {
-  TableInfo.value.materials = await TableInfo.value.listMaterials();
+  await TableInfo.value.listMaterials();
 });
 
 // [ EVENTBUS ]
@@ -26,7 +26,7 @@ EM.on("VIEW_MATERIALS_titleForm", (title: string): void => {
   Materials.value.titleForm = title;
 });
 EM.on("VIEW_MATERIALS_updateTable", async (): Promise<void> => {
-  TableInfo.value.materials = await TableInfo.value.listMaterials();
+  await TableInfo.value.listMaterials();
 });
 </script>
 
@@ -38,7 +38,8 @@ EM.on("VIEW_MATERIALS_updateTable", async (): Promise<void> => {
       :data="TableInfo.materials",
       :deleteIcon="true",
       @activeDelete="TableInfo.deleteMaterialSelected($event)",
-      @itemSelected="TableInfo.saveMaterialSelected($event)"
+      @itemSelected="TableInfo.saveMaterialSelected($event)",
+      @searchData="TableInfo.searchMaterial($event)"
     )
   .materials__actions
     h2 {{ Materials.titleForm }}
