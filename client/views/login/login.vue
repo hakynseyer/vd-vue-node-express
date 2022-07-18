@@ -13,7 +13,7 @@ import { FormClass } from "./ts/form";
 const form = ref<FormClass>(new FormClass());
 
 // [ EVENTBUS ]
-EM.emit("APP_H1", "Iniciar Sesión");
+EM.emit("APP_h1", "Iniciar Sesión");
 
 // [ METHODS ]
 /* const inputData = (data: string) => { */

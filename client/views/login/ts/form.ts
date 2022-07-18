@@ -70,7 +70,7 @@ export class FormClass {
   }
 
   public async sendForm(): Promise<void> {
-    EM.emit("ALERT", {
+    EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "warning",
       message: "Enviando Datos al Servidor",
       status: true,
@@ -91,7 +91,7 @@ export class FormClass {
 
       switch (res.status) {
         case 200:
-          EM.emit("ALERT", {
+          EM.emit("COMPONENT_ALERT_launchAlert", {
             color: "success",
             message: "Usuario Logueado",
             status: true,
@@ -113,7 +113,7 @@ export class FormClass {
               this._form[key].error = datos.error[key];
           });
 
-          EM.emit("ALERT", { status: false });
+          EM.emit("COMPONENT_ALERT_launchAlert", { status: false });
 
           return;
           break;
@@ -122,7 +122,7 @@ export class FormClass {
       console.error(e);
     }
 
-    EM.emit("ALERT", {
+    EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "danger",
       message: "Hubo un problema con el servidor",
       status: true,

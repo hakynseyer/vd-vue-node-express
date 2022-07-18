@@ -1,13 +1,14 @@
 *
   margin: 0
   padding: 0
-  box-sizing: boder-box
+  box-sizing: border-box
 
   --color-primary: #6C3B73;
   --color-secondary: #BB0E69;
   --color-success: #40e583;
   --color-danger: #de1041;
   --color-warning: #ffac0a;
+  --color-info: #3069A8;
 
   --color-dark: #1c1b1f;
   --color-white: #ededed;
@@ -44,6 +45,11 @@ option
   cursor: pointer !important
   border: none !important
   outline: none !important
+
+button
+  border: none
+  outline: none
+  cursor: pointer
 
 button:disabled
   background-color: var(--color-dark) !important
@@ -127,3 +133,4 @@ h2
   &:hover
     background-color: var(--color-primary)
     color: var(--color-white)
+    pointer-events: none

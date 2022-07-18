@@ -17,8 +17,8 @@ const classAlert: ComputedRef = computed((): string => {
 
 // [ EVENTBUS ]
 EM.on(
-  "ALERT",
-  ({ color, status, message, timer }: Interfaces.ALERT_DATA): void => {
+  "COMPONENT_ALERT_launchAlert",
+  ({ color, status, message, timer }: Interfaces.TypeAlertData): void => {
     if (color !== undefined)
       if (color.length)
         if (alertColor.value !== color) alertColor.value = color;

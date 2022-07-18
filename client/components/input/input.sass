@@ -4,6 +4,7 @@
   padding: .5rem
   // display: flex
   // flex-direction: column
+  // overflow: hidden
 
   label
     font-size: .8rem
@@ -20,7 +21,7 @@
     border: none
     border-bottom: solid 2px var(--color-primary)
     background-color: transparent
-    text-indent: 1rem
+    // text-indent: 1rem
     // font-weight: bold
     font-size: 1rem
     padding: .5rem
@@ -35,3 +36,41 @@
     font-weight: bold
     color: var(--color-danger)
     font-style: italic
+
+  &__select
+    display: flex
+    width: 100%
+    border-bottom: solid 2px var(--color-primary)
+    padding: .5rem
+    cursor: pointer
+    position: relative
+
+    span
+      font-size: 1rem
+      color: var(--color-dark)
+      font-weight: normal
+      font-style: normal
+
+    &__options
+      list-style: none
+      position: absolute
+      z-index: 2
+      left: 0
+      top: 0
+      width: 100%
+      border: solid 2px var(--color-primary)
+      border-radius: 10px
+      background-color: var(--color-white)
+      // background-color: var(--color-primary)
+
+      li
+        padding: .5em
+        color: var(--color-primary) 
+        font-weight: bold
+        border-bottom: solid 1px var(--color-primary)
+        cursor: pointer
+        user-select: none
+
+        &:hover
+          background-color: var(--color-primary)
+          color: var(--color-white)

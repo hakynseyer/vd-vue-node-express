@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 // [ ESCENCIALES ]
 import { ref, onMounted } from "vue";
+import { EM } from "@Assets/ts/mitt";
+import * as Interfaces from "@TS/interfaces";
 
 // [ COMPONENTES ]
 import Input from "@Components/input/input.vue";
@@ -15,6 +17,28 @@ const form = ref<FormClass>(new FormClass());
 onMounted(async () => {
   form.value.providerList = await form.value.getProviderList();
 });
+
+// [ EVENTBUS ]
+EM.on(
+  "VIEW_MATERIALS_FORM_materialSelected",
+  (material: Interfaces.TypeMaterial): void => {
+    form.value.materialSelected = material;
+
+    form.value.name = material.name;
+    form.value.description = material.description;
+    form.value.amount = material.amount;
+    form.value.um = material.um;
+    form.value.price = Number(material.price);
+    form.value.provider = material["idProvider"];
+  }
+);
+
+EM.on(
+  "VIEW_MATERIALS_FORM_deleteMaterial",
+  (material: Interfaces.TypeMaterial): void => {
+    form.value.deleteMaterial(material);
+  }
+);
 </script>
 
 <template lang="pug">

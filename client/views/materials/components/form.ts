@@ -1,6 +1,6 @@
 import { computed } from "vue";
 import type { ComputedRef } from "vue";
-import { SelectOptions } from "@TS/interfaces";
+import { TypeSelectOptions, TypeMaterial } from "@TS/interfaces";
 
 import { Fetch, FETCH_METHODS } from "@Assets/ts/fetch";
 
@@ -37,19 +37,38 @@ interface FormData {
 
 export class FormClass {
   private _form: FormData;
-  private _umList: Array<SelectOptions>;
+
+  private _umList: Array<TypeSelectOptions>;
   private _providerList: any;
 
+  private _materialSelected: TypeMaterial;
+
   constructor() {
+    this.clearData();
+
+    this._umList = [
+      { label: "Kilogramos", value: "Kilogramos" },
+      { label: "Gramos", value: "Gramos" },
+      { label: "Litros", value: "Litros" },
+      { label: "Piezas", value: "Piezas" },
+      { label: "Bultos", value: "Bultos" },
+    ];
+
+    this._providerList = null;
+    this._materialSelected = null;
+  }
+
+  private clearData() {
+    EM.emit("VIEW_MATERIALS_titleForm", "Nuevo Material");
+
+    if (this._materialSelected !== null) this._materialSelected = null;
+
     this._form = {
       name: {
         data: "",
         error: "",
       },
-      description: {
-        data: "",
-        error: "",
-      },
+      description: { data: "", error: "" },
       amount: {
         data: 0.0,
         error: "",
@@ -67,21 +86,12 @@ export class FormClass {
         error: "",
       },
     };
-
-    this._umList = [
-      { label: "Kilogramos", value: "Kilogramos" },
-      { label: "Gramos", value: "Gramos" },
-      { label: "Litros", value: "Litros" },
-      { label: "Piezas", value: "Piezas" },
-      { label: "Bultos", value: "Bultos" },
-    ];
-
-    this._providerList = null;
   }
 
-  get umList(): Array<SelectOptions> {
+  get umList(): Array<TypeSelectOptions> {
     return this._umList;
   }
+
   get providerList(): any {
     return this._providerList;
   }
@@ -149,6 +159,13 @@ export class FormClass {
     return this._form.provider.error;
   }
 
+  get materialSelected(): TypeMaterial {
+    return this._materialSelected;
+  }
+  set materialSelected(material: TypeMaterial) {
+    this._materialSelected = material;
+  }
+
   get enableSend(): ComputedRef<boolean> {
     return computed<boolean>((): boolean => {
       const noEmpty: boolean =
@@ -187,7 +204,7 @@ export class FormClass {
       console.error(e);
     }
 
-    EM.emit("ALERT", {
+    EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "danger",
       message: "Hubo un problema con el servidor",
       status: true,
@@ -195,39 +212,56 @@ export class FormClass {
   }
 
   public async sendForm(): Promise<void> {
-    EM.emit("ALERT", {
+    console.log("HOLA");
+    return;
+    EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "warning",
       message: "Enviando Datos al Servidor",
       status: true,
     });
 
+    const bodyRequest = {
+      name: this._form.name.data,
+      description: this._form.description.data,
+      amount: this._form.amount.data,
+      um: this._form.um.data,
+      price: this._form.price.data,
+      provider: this._form.provider.data,
+    };
+
+    if (this._materialSelected !== null)
+      bodyRequest["id"] = this._materialSelected.id;
+
     const request: Request = Fetch.request(
-      `${THE_SERVER.host}/material/crear`,
-      FETCH_METHODS.POST,
-      {
-        name: this._form.name.data,
-        description: this._form.description.data,
-        amount: this._form.amount.data,
-        um: this._form.um.data,
-        price: this._form.price.data,
-        provider: this._form.provider.data,
-      }
+      this._materialSelected === null
+        ? `${THE_SERVER.host}/material/crear`
+        : `${THE_SERVER.host}/material/actualizar`,
+      this._materialSelected === null ? FETCH_METHODS.POST : FETCH_METHODS.PUT,
+      bodyRequest
     );
 
     try {
       const res = await fetch(request);
       const datos = await res.json();
-      console.log(datos);
+
       switch (res.status) {
         case 200:
-          EM.emit("ALERT", {
+          EM.emit("COMPONENT_ALERT_launchAlert", {
             color: "success",
-            message: `Material ${datos.newMaterial.name} creado`,
+            message:
+              this._materialSelected === null
+                ? `Material ${datos.newMaterial.name} creado`
+                : `Material ${datos.material.name} actualizado`,
             status: true,
-            timer: 2000,
+            timer: 5000,
           });
 
-          // Limpiar Formulario
+          // Actualizar Tabla
+          EM.emit("VIEW_MATERIALS_updateTable");
+
+          // Limpiar Datos
+          this.clearData();
+
           return;
           break;
         case 406:
@@ -236,7 +270,7 @@ export class FormClass {
               this._form[key].error = datos.error[key];
           });
 
-          EM.emit("ALERT", { status: false });
+          EM.emit("COMPONENT_ALERT_launchAlert", { status: false });
 
           return;
           break;
@@ -245,7 +279,47 @@ export class FormClass {
       console.error(e);
     }
 
-    EM.emit("ALERT", {
+    EM.emit("COMPONENT_ALERT_launchAlert", {
+      color: "danger",
+      message: "Hubo un problema con el servidor",
+      status: true,
+    });
+  }
+
+  public async deleteMaterial(material: TypeMaterial): Promise<void> {
+    this.clearData();
+
+    const request: Request = Fetch.request(
+      `${THE_SERVER.host}/material/eliminar`,
+      FETCH_METHODS.DELETE,
+      {
+        id: material.id,
+      }
+    );
+
+    try {
+      const res = await fetch(request);
+
+      switch (res.status) {
+        case 204:
+          EM.emit("COMPONENT_ALERT_launchAlert", {
+            color: "success",
+            message: `Material ${material.name} eliminado`,
+            status: true,
+            timer: 5000,
+          });
+
+          // Actualizar Tabla
+          EM.emit("VIEW_MATERIALS_updateTable");
+
+          return;
+          break;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+    EM.emit("COMPONENT_ALERT_launchAlert", {
       color: "danger",
       message: "Hubo un problema con el servidor",
       status: true,

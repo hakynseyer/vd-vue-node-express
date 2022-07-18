@@ -1,3 +1,5 @@
+import { EM } from "@Assets/ts/mitt";
+
 export class MaterialsClass {
   private _titleForm: string;
 

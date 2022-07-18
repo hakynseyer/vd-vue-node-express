@@ -2,9 +2,6 @@
 // [ ESCENCIALES ]
 import { ref, onMounted } from "vue";
 import { EM } from "@Assets/ts/mitt";
-import { Fetch, FETCH_METHODS } from "@Assets/ts/fetch";
-
-declare var THE_SERVER: any;
 
 // [ COMPONENTS ]
 import Table from "@Components/table/table.vue";
@@ -20,31 +17,17 @@ const TableInfo = ref<TableClass>(new TableClass());
 
 // [ HOOKS ]
 onMounted(async () => {
-  const request: Request = Fetch.request(
-    `${THE_SERVER.host}/material`,
-    FETCH_METHODS.GET
-  );
-
-  try {
-    const res = await fetch(request);
-    const data = await res.json();
-
-    TableInfo.value.materials = data.materials;
-
-    return;
-  } catch (e) {
-    console.error(e);
-  }
-
-  EM.emit("ALERT", {
-    color: "danger",
-    message: "Hubo un problema con el servidor",
-    status: true,
-  });
+  TableInfo.value.materials = await TableInfo.value.listMaterials();
 });
 
 // [ EVENTBUS ]
-EM.emit("APP_H1", "Lista de Materiales");
+EM.emit("APP_h1", "Materiales");
+EM.on("VIEW_MATERIALS_titleForm", (title: string): void => {
+  Materials.value.titleForm = title;
+});
+EM.on("VIEW_MATERIALS_updateTable", async (): Promise<void> => {
+  TableInfo.value.materials = await TableInfo.value.listMaterials();
+});
 </script>
 
 <template lang="pug">
@@ -53,6 +36,8 @@ EM.emit("APP_H1", "Lista de Materiales");
     Table(
       :header="TableInfo.headers",
       :data="TableInfo.materials",
+      :deleteIcon="true",
+      @activeDelete="TableInfo.deleteMaterialSelected($event)",
       @itemSelected="TableInfo.saveMaterialSelected($event)"
     )
   .materials__actions

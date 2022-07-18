@@ -14,7 +14,7 @@ const h1 = ref<string>("");
 /* const Alert = ref<Alert_Class>(new Alert_Class()); */
 
 // [ EVENTBUS ]
-EM.on("APP_H1", (title: string): void => {
+EM.on("APP_h1", (title: string): void => {
   h1.value = title;
 });
 </script>
