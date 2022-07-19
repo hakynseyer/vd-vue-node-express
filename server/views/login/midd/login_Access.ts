@@ -38,6 +38,7 @@ export class login_Access {
             process.env.JWT_SECRET_KEY || "tokenScret",
             {
               expiresIn: 60 * 60,
+              // expiresIn: 10,
             }
           );
 

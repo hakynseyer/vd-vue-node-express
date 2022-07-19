@@ -1,30 +1,41 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-// import { Fetch, FETCH_METHODS } from "@Extras/ts/fetch";
-// import { useStore } from "@Extras/ts/store";
+import { Fetch, FETCH_METHODS } from "@Assets/ts/fetch";
+import { useStore } from "@Assets/ts/store";
 
 import Login from "@Views/login/login.vue";
 import Materials from "@Views/materials/materials.vue";
 import Providers from "@Views/providers/providers.vue";
-// import Clientes from '@Vistas/clientes/clientes.vue';
+import Users from "@Views/users/users.vue";
+import Ranks from "@Views/ranks/ranks.vue";
 
 declare var THE_SERVER: any;
 
 const routes = [
   { path: "/", name: "login", component: Login },
-  { path: "/materials", name: "materials", component: Materials },
-  { path: "/providers", name: "providers", component: Providers },
-  // {
-  //   path: '/panel',
-  //   name: 'panel',
-  //   component: Panel,
-  //   meta: { requireAuth: true },
-  // },
-  // {
-  //   path: '/clientes',
-  //   name: 'clientes',
-  //   component: Clientes,
-  //   meta: { requireAuth: true },
-  // },
+  {
+    path: "/materials",
+    name: "materials",
+    component: Materials,
+    meta: { requireAuth: true },
+  },
+  {
+    path: "/providers",
+    name: "providers",
+    component: Providers,
+    meta: { requireAuth: true },
+  },
+  {
+    path: "/users",
+    name: "users",
+    component: Users,
+    meta: { requireAuth: true },
+  },
+  {
+    path: "/ranks",
+    name: "ranks",
+    component: Ranks,
+    meta: { requireAuth: true },
+  },
 ];
 
 export const router = createRouter({
@@ -32,42 +43,39 @@ export const router = createRouter({
   routes,
 });
 
-// router.beforeEach(async (to, from, next) => {
-//   const toMetaParams: Array<string> = Object.keys(to.meta);
+router.beforeEach(async (to, from, next) => {
+  const toMetaParams: Array<string> = Object.keys(to.meta);
 
-//   if (toMetaParams.includes('requireAuth')) {
-//     if (to.meta.requireAuth) {
-//       const request: Request = Fetch.request(
-//         `${THE_SERVER.host}/login/token`,
-//         FETCH_METHODS.POST
-//       );
+  if (toMetaParams.includes("requireAuth")) {
+    if (to.meta.requireAuth) {
+      const request: Request = Fetch.request(
+        `${THE_SERVER.host}/login/token`,
+        FETCH_METHODS.POST
+      );
 
-//       try {
-//         const res = await fetch(request);
-//         const datos = await res.json();
-//         const pinia = useStore();
+      try {
+        const res = await fetch(request);
+        const datos = await res.json();
+        const pinia = useStore();
 
-//         if (res.status === 201) {
-//           pinia.empleado.nombre = datos.token.empleado.nombre;
-//           pinia.empleado.status = datos.token.empleado.status;
-//           pinia.empleado.turno = datos.token.empleado.turno;
-//           pinia.empleado.rol.area = datos.token.empleado.rol.area;
-//           pinia.empleado.rol.permisos = datos.token.empleado.rol.permisos;
-//           pinia.empleado.rol.rol = datos.token.empleado.rol.rol;
+        if (res.status === 201) {
+          pinia.user.name = datos.name;
+          pinia.user.surnameFirst = datos.surnameFirst;
+          pinia.user.rank = datos.rank;
 
-//           next();
-//         } else {
-//           console.error(datos.errors.token);
-//           pinia.$reset();
+          next();
+        } else {
+          console.error(datos.errors.token);
+          pinia.$reset();
 
-//           next({ name: 'login' });
-//         }
-//       } catch (e) {
-//         console.error('Hubo un error con el servidor :(');
-//         // TODO La idea es crear un modal mostrando el error anterior
+          next({ name: "login" });
+        }
+      } catch (e) {
+        console.error("Hubo un error con el servidor :(");
+        // TODO La idea es crear un modal mostrando el error anterior
 
-//         next({ name: 'login' });
-//       }
-//     } else next();
-//   } else next();
-// });
+        next({ name: "login" });
+      }
+    } else next();
+  } else next();
+});

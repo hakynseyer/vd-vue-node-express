@@ -2,7 +2,7 @@ GET {{HTTP_HOST}}/usuario
 Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 
-GET {{HTTP_HOST}}/usuario/13
+GET {{HTTP_HOST}}/usuario/1
 Content-Type: application/json
 Authorization: Token {{HTTP_TOKEN}}
 

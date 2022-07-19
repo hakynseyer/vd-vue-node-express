@@ -37,3 +37,23 @@ export type TypeProvider = {
   user: string;
   rank: string;
 };
+
+export type TypeUser = {
+  id: number;
+  name: string;
+  surnameFirst: string;
+  surnameSecond: string;
+  password: string;
+  address: string;
+  city: string;
+  country: string;
+  notes: string;
+  idRank: number;
+  rank: string;
+};
+
+export type TypeRank = {
+  id: number;
+  rank: string;
+  description: string;
+};

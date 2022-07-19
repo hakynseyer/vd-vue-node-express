@@ -14,26 +14,21 @@ const form = ref<FormClass>(new FormClass());
 
 // [ EVENTBUS ]
 EM.emit("APP_h1", "Iniciar Sesión");
-
-// [ METHODS ]
-/* const inputData = (data: string) => { */
-/*   form.value.user = data; */
-/* }; */
 </script>
 
 <template lang="pug">
-.form
-  span {{ form.user }}
-  Input(label="Usuario", :error="form.userError", v-model="form.user")
-  Input(
-    typeInput="password",
-    label="Contraseña",
-    :error="form.passwordError",
-    v-model="form.password"
-  )
-  button.sendButton(type="button", @click="form.sendForm()") Enviar
+.login
+  .form
+    Input(label="Usuario", :error="form.userError", v-model="form.user")
+    Input(
+      typeInput="password",
+      label="Contraseña",
+      :error="form.passwordError",
+      v-model="form.password"
+    )
+    button.form__sendButton(type="button", @click="form.sendForm()") Enviar
 </template>
 
 <style lang="sass" scoped>
-@import "./login.sass";
+@import "@Assets/sass/form.sass", "./login.sass";
 </style>

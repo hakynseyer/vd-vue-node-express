@@ -3,6 +3,8 @@ import { Request, Response, NextFunction } from "express";
 import { Users } from "../../../models/users";
 import { Ranks } from "../../../models/ranks";
 
+import bcrypt from "bcryptjs";
+
 export class user_Update {
   public static async midd(req: Request, res: Response, next: NextFunction) {
     const {
@@ -18,6 +20,8 @@ export class user_Update {
       rank,
     } = req.body;
 
+    const salt = await bcrypt.genSalt(10);
+
     try {
       const updateUser = await Users.findByPk(id, {
         include: [
@@ -31,7 +35,7 @@ export class user_Update {
         name,
         surname_first: surnameFirst,
         surname_second: surnameSecond,
-        password,
+        password: await bcrypt.hash(password, salt),
         address,
         city,
         country,
