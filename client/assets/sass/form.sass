@@ -1,3 +1,63 @@
+.form
+  width: 100%
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+
+  &__row
+    // background-color: yellow
+    width: 42%
+    margin: 1rem
+
+  &__input
+    width: 100%
+    margin-bottom: 1rem
+
+    &:last-child
+      margin-bottom: 0
+  
+  &__controls
+    width: 100%
+    margin-bottom: .3rem
+    padding: 0 .5rem
+
+    &--new
+      width: 80px
+      padding: 5px
+      border-radius: 5px
+      background-color: var(--color-success)
+      display: flex
+      align-items: center
+      cursor: pointer
+
+      i
+        font-size: 1.1rem 
+
+      span
+        text-align: center
+        font-size: .7rem
+        display: block
+        user-select: none
+
+  &__sendButton
+    border: solid 3px var(--color-primary)
+    outline: none
+    color: var(--color-primary)
+    cursor: pointer
+    padding: 1rem
+    font-size: 1rem
+    font-weight: bold
+    border-radius: 10px
+
+    &:hover
+      background-color: var(--color-primary)
+      color: var(--color-white)
+
+    &:disabled
+      background-color: var(--color-dark) !important
+      border: solid 2px var(--color-dark)
+      color: var(--color-white)
+
 .input
   width: 100%
   padding: .5rem
@@ -14,7 +74,7 @@
   input, textarea, select
     width: 100% !important
     border: none
-    border-bottom: solid 2px var(--color-primary)
+    border-bottom: solid 2px var(--color-dark)
     background-color: transparent
     font-size: 1rem
     padding: .5rem
@@ -28,4 +88,3 @@
     font-weight: bold
     color: var(--color-danger)
     font-style: italic
-

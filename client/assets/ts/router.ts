@@ -4,7 +4,7 @@ import { createRouter, createWebHashHistory } from "vue-router";
 
 import Login from "@Views/login/login.vue";
 import Materials from "@Views/materials/materials.vue";
-// import Panel from '@Vistas/panel/panel.vue';
+import Providers from "@Views/providers/providers.vue";
 // import Clientes from '@Vistas/clientes/clientes.vue';
 
 declare var THE_SERVER: any;
@@ -12,6 +12,7 @@ declare var THE_SERVER: any;
 const routes = [
   { path: "/", name: "login", component: Login },
   { path: "/materials", name: "materials", component: Materials },
+  { path: "/providers", name: "providers", component: Providers },
   // {
   //   path: '/panel',
   //   name: 'panel',

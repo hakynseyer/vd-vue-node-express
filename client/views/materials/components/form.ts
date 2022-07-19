@@ -58,7 +58,7 @@ export class FormClass {
     this._materialSelected = null;
   }
 
-  private clearData() {
+  public clearData() {
     EM.emit("VIEW_MATERIALS_titleForm", "Nuevo Material");
 
     if (this._materialSelected !== null) this._materialSelected = null;
@@ -94,9 +94,6 @@ export class FormClass {
 
   get providerList(): any {
     return this._providerList;
-  }
-  set providerList(providerList: any) {
-    this._providerList = providerList;
   }
 
   get name(): string {
@@ -199,7 +196,7 @@ export class FormClass {
       const res = await fetch(request);
       const data = await res.json();
 
-      return data.providers.map((provider) => {
+      this._providerList = data.providers.map((provider) => {
         return {
           value: provider.id,
           label: provider.company,

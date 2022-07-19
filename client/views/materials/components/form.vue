@@ -16,7 +16,7 @@ const form = ref<FormClass>(new FormClass());
 
 // [ HOOKS ]
 onMounted(async () => {
-  form.value.providerList = await form.value.getProviderList();
+  await form.value.getProviderList();
 });
 
 // [ EVENTBUS ]
@@ -44,6 +44,14 @@ EM.on(
 
 <template lang="pug">
 .form
+  .form__controls
+    .form__controls--new(
+      @click="form.clearData()",
+      v-show="form.materialSelected"
+    )
+      i.material-icons add
+      span Nuevo Material
+
   Input(label="Producto", :error="form.nameError", v-model="form.name")
 
   Input(
@@ -80,7 +88,7 @@ EM.on(
     v-model="form.provider"
   )
 
-  button.sendButton(
+  button.form__sendButton(
     type="button",
     @click="form.sendForm()",
     :disabled="form.enableSend"
@@ -88,5 +96,5 @@ EM.on(
 </template>
 
 <style lang="sass" scoped>
-@import "./form.sass"
+@import "@Assets/sass/form.sass"
 </style>

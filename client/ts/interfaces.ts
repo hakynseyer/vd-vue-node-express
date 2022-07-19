@@ -28,3 +28,12 @@ export type TypeMaterial = {
   user: string;
   rank: string;
 };
+
+export type TypeProvider = {
+  id: number;
+  company: string;
+  description: string;
+  idUser: number;
+  user: string;
+  rank: string;
+};
